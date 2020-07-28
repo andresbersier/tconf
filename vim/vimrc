@@ -1,0 +1,249 @@
+syntax on
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call plug#begin()
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'zchee/deoplete-clang', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/echodoc.vim',   { 'do': ':UpdateRemotePlugins' }
+Plug 'iberianpig/tig-explorer.vim'
+call plug#end()
+set cmdheight=2
+set completeopt-=preview
+let g:deoplete#enable_at_startup = 1
+let g:echodoc_enable_at_startup = 1
+let g:echodoc_type = 'echo'
+let g:deoplete#sources#clang#libclang_path = '/usr/lib/llvm-6.0/lib/libclang.so'
+let g:deoplete#sources#clang#clang_header	= '/usr/lib/llvm-6.0/lib/clang'
+let g:deoplete#max_menu_width = 500
+let g:deoplete#max_list = 500
+call deoplete#custom#source('member', 'rank', 1003)
+call deoplete#custom#source('buffer', 'rank', 1002)
+call deoplete#custom#source('file',   'rank', 1001)
+call deoplete#custom#source('around', 'rank', 1000)
+call deoplete#custom#source('clang', 'rank', 999)
+
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+"Plugin 'Valloric/YouCompleteMe'
+
+Plugin 'ervandew/supertab'
+
+Plugin 'scrooloose/nerdtree'
+
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+
+Plugin 'jistr/vim-nerdtree-tabs'
+
+Plugin 'tpope/vim-fugitive'
+
+Plugin 'wesleyche/SrcExpl'
+
+Plugin 'mileszs/ack.vim'
+
+Plugin 'taglist.vim'
+
+Plugin 'scrooloose/nerdcommenter'
+
+Plugin 'majutsushi/tagbar'
+
+Plugin 'autoload_cscope.vim'
+
+Plugin 'brookhong/cscope.vim'
+
+Plugin 'craigemery/vim-autotag'
+
+"Plugin 'ctrlpvim/ctrlp.vim'
+
+
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
+
+Plugin 'fatih/vim-go'
+
+Plugin 'danro/rename.vim'
+
+Plugin 'gregsexton/gitv'
+
+"Plugin 'hari-rangarajan/CCTree' 
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+let g:ycm_global_ycm_extra_conf = '$HOME/.vim/ycm_extra_conf/ycm_extra_conf.py'
+
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
+:set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
+
+:set tabstop=2 softtabstop=0 expandtab shiftwidth=2 smarttab
+
+:set nu
+
+:set expandtab
+
+"if executable('ag')
+"    "use ag over grep
+"    set grepprg=ag\ --nogroup\ --nocolor
+
+ "   let g:ctrlp_user_command = 'ag %s -l --nocolor -g 
+
+"    let g:ctrlp_use_caching = 0
+"endif
+
+":command Spacekill :%s/\s\+$//
+
+
+"" // The switch of the Source Explorer
+"" " 
+"nmap <F8> :SrcExplToggle<CR> 
+""" "
+""" " 
+""" " // Set the height of Source Explorer window
+""" " 
+"let g:SrcExpl_winHeight = 8 
+""" "
+""" " 
+""" " // Set 100 ms for refreshing the Source Explorer
+""" " 
+"let g:SrcExpl_refreshTime = 100 
+""" "
+""" " 
+""" " // Set "Enter" key to jump into the exact definition context
+""" " 
+"let g:SrcExpl_jumpKey = "<ENTER>" 
+""" "
+""" " 
+""" " // Set "Space" key for back from the definition context
+""" " 
+"let g:SrcExpl_gobackKey = "<SPACE>" 
+""" "
+""" " 
+""" " // In order to avoid conflicts, the Source Explorer should know what
+""" plugins " 
+""" " // except itself are using buffers. And you need add their buffer names
+""" into " 
+""" " // below listaccording to the command ":buffers!"
+""" " 
+"let g:SrcExpl_pluginList = [ 
+         "\ "__Tag_List__", 
+         "\ "NERD_tree_1",
+         "\ "__Tagbar__.1",
+         "\ "[Location List]"
+     "\ ] 
+""" "
+""" " 
+""" " // Enable/Disable the local definition searching, and note that this is
+""" not  " 
+""" " // guaranteed to work, the Source Explorer doesn't check the syntax for
+""" now. " 
+""" " // It only searches for a match with the keyword according to command 'gd'
+""" " 
+"let g:SrcExpl_searchLocalDef = 1 
+""" "
+""" " 
+""" " // Do not let the Source Explorer update the tags file when opening
+""" " 
+"let g:SrcExpl_isUpdateTags = 0 
+""" "
+""" " 
+""" " // Use 'Exuberant Ctags' with '--sort=foldcase -R .' or '-L cscope.files'
+""" to " 
+""" " //  create/update a tags file
+""" " 
+"let g:SrcExpl_updateTagsCmd = "ctags --sort=foldcase -R ." 
+""let g:SrcExpl_updateTagsCmd = "ctags -L cscope.files" 
+""" "
+""" " 
+""" " // Set "<F5>" key for updating the tags file artificially
+""" " 
+"let g:SrcExpl_updateTagsKey = "<F5>" 
+""" "
+""" " 
+""" " // Set "<F3>" key for displaying the previous definition in the jump list
+""" " 
+"let g:SrcExpl_prevDefKey = "<F3>" 
+""" "
+""" " 
+""" " // Set "<F4>" key for displaying the next definition in the jump list
+""" " 
+"let g:SrcExpl_nextDefKey = "<F4>" 
+:let mapleader=" "
+
+:nmap <F9> :NERDTreeTabsToggle<CR>
+
+:nmap <F10> :TagbarToggle<CR>
+
+:nmap <silent> <C-h> :wincmd h<CR>
+:nmap <silent> <C-j> :wincmd j<CR>
+:nmap <silent> <C-k> :wincmd k<CR>
+:nmap <silent> <C-l> :wincmd l<CR>
+
+:nmap <leader>f /\c
+:nnoremap q <c-v>
+
+:nmap - 10<Up>
+:nmap = 10<Down>
+
+:nnoremap H H10<Up>
+:nnoremap L L10<Down>
+
+"nnoremap <leader>fi :call CscopeFindInteractive(expand('<cword>'))<CR>
+"nnoremap <leader>l :call ToggleLocationList()<CR>
+"nnoremap  <leader>f :call CscopeFind('s', expand('<cword>'))<CR>
+nnoremap <leader>ff :Ag <C-R><C-W><CR>
+"autocmd VimEnter * NERDTree
+autocmd VimEnter * wincmd p
+"autocmd VimEnter * TagbarOpen
+
+:nmap <Leader>d <C-w><C-]><C-w>T<Paste>
+:nmap <leader><Right> :tabn<CR>
+:nmap <leader><Left> :tabp<CR>
+:nmap <F1> <Del>
+:imap <F1> <Del>
+:nmap ; :
+
+let g:ale_lint_on_text_changed = 'always'
+let g:ale_lint_delay = 1000
+" You can disable this option too
+" if you don't want linters to run on opening a file
+let g:ale_lint_on_enter = 1
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 1
+
+set cursorline!
+set lazyredraw
+highlight CursorLine cterm=none
+autocmd InsertEnter * highlight CursorLine cterm=bold ctermfg=None
+autocmd InsertEnter * highlight Normal ctermfg=Red ctermbg=Black
+autocmd InsertLeave * highlight CursorLine cterm=none ctermfg=None
+autocmd InsertLeave * highlight Normal cterm=none ctermfg=None ctermbg=None
+highlight ALEWarningSign cterm=italic
+highlight ALEErrorSign cterm=italic
+set notimeout
+set timeoutlen=100
+set ttimeout
+set cst
+set clipboard=unnamedplus
+
+"colorscheme butter
+execute pathogen#infect()
+call pathogen#helptags()
