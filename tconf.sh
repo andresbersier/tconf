@@ -6,9 +6,9 @@ sudo apt install neovim
 sudo apt install exuberant-ctags
 sudo apt install cscope
 sudo apt install cmake
-cp vimrc ~/.vimrc
+cp vim/vimrc ~/.vimrc
 mkdir ~/.config/nvim
-cp init.vim ~/.config/nvim/
+cp vim/init.vim ~/.config/nvim/
 mv ~/.config/nvim/plug.vim ~/.config/nvim/autoload/plug.vim
 curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 nvim -E -s -u "~/.vimrc" +PlugInstall +qall
@@ -21,8 +21,8 @@ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/chrissicool/zsh-256color ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-256color
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-cp zshrc ~/.zshrc
-cp p10k.zsh ~/.p10k.zsh
+cp zsh/zshrc ~/.zshrc
+cp zsh/p10k.zsh ~/.p10k.zsh
 mkdir .local/share/fonts
 cp fonts/* .local/share/fonts
 fc-cache -f -v
